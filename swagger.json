@@ -1,0 +1,130 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Express API with TypeScript and MongoDB",
+    "version": "1.0.0",
+    "description": "API documentation for movies in the lobby"
+  },
+  "basePath": "/",
+  "paths": {
+    "/movies": {
+      "get": {
+        "summary": "Get all movies",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "genre": { "type": "string" },
+                  "rating": { "type": "number" },
+                  "streamingLink": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new movie",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Movie created successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string" },
+                "genre": { "type": "string" },
+                "rating": { "type": "number" },
+                "streamingLink": { "type": "string" }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request: Invalid input"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Search for movies by title or genre",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "genre": { "type": "string" },
+                  "rating": { "type": "number" },
+                  "streamingLink": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "put": {
+        "summary": "Update an existing movie (admin role required)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie updated successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": { "type": "string" },
+                "genre": { "type": "string" },
+                "rating": { "type": "number" },
+                "streamingLink": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a movie (admin role required)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie deleted successfully"
+          }
+        }
+      }
+    }
+  }
+}
